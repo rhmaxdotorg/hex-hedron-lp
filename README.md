@@ -54,6 +54,6 @@ $ ./lp.py track hex
 +0.06%
 +0.02%
 ...
-``
+```
 
 Of course this is just testing console alerts (this could also be email alerts, written to a file that is monitored, etc) with 0.03%, but you can adjust it to alert on 15% moves over 4hr time periods, whatever you think is useful for tracking LP.
