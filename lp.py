@@ -14,6 +14,8 @@ import requests
 #
 # UPDATED AS OF 03/27/23 -- doesn't contain every pool, just the larger ones
 #
+# Note: better if there was a way to get list of all pools for token or pair and just use that
+#
 
 #HEX_USDC_POOL_ONE = "0x69d91b94f0aaf8e8a2586909fa77a5c2c89818d5" # hex/usdc big pool
 #HEX_USDC_POOL_TWO = "0xe05e653453f733786f2dabae0ffa1e96cfcc4b25"
@@ -50,7 +52,7 @@ SLEEP_TIME = 60 # 1 minute
 #SLEEP_TIME = 60 * 5 # 5 minutes
 #SLEEP_TIME = 60 * 60 * 2 # 2 hours
 
-ALERT_PERCENTAGE = 0.03 # alert if -/+ 1% change
+ALERT_PERCENTAGE = 0.03 # alert if -/+ 0.03% change
 #ALERT_PERCENTAGE = 5 # alert if -/+ 5% change
 #ALERT_PERCENTAGE = 15 # alert if -/+ 15% change
 #ALERT_PERCENTAGE = 25 # alert if -/+ 25% change
@@ -95,7 +97,7 @@ def trackTotalLP(coin):
             lp = getTotalLP(pools)
 
             #
-            # not sure what the best cadence is here
+            # not sure what the best cadence is here -- check config above
             # perhaps you want to check every 1-4 hours to catch swings
             # and on a minute-basis if you want to chart data or otherwise
             #
