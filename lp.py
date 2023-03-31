@@ -12,6 +12,8 @@ import requests
 #
 # pools
 #
+# HEX pool info: https://info.uniswap.org/#/tokens/0x2b591e99afe9f32eaa6214f7b7629768c40eeb39
+#
 # UPDATED AS OF 03/27/23 -- doesn't contain every pool, just the larger ones
 #
 # Note: better if there was a way to get list of all pools for token or pair and just use that
