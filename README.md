@@ -27,32 +27,21 @@ HDRN: $4,210,140
 **Track HEX liquidity changes**
 ```
 $ ./lp.py track hex
--0.01%
+-0.42%
+-0.27%
 
-[!!!] LP CHANGED BY 0.04% (alert set on >= 0.03%) [!!!]
+[!!!] LP CHANGED BY -8.96% (alert set on >= 5.00%) [!!!]
 
-+0.04%
-
-[!!!] LP CHANGED BY 0.70% (alert set on >= 0.03%) [!!!]
-
-+0.70%
-
-[!!!] LP CHANGED BY 0.10% (alert set on >= 0.03%) [!!!]
-
-+0.10%
-
-[!!!] LP CHANGED BY 0.30% (alert set on >= 0.03%) [!!!]
-
-+0.30%
-
-[!!!] LP CHANGED BY 0.04% (alert set on >= 0.03%) [!!!]
-
-+0.04%
-
-[!!!] LP CHANGED BY 0.06% (alert set on >= 0.03%) [!!!]
-
-+0.06%
-+0.02%
+-8.96%
+-0.84%
++0.59%
++0.65%
++0.07%
++0.60%
++0.39%
++0.07%
++0.81%
+-1.56%
 ...
 ```
 
