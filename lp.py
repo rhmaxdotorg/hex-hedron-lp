@@ -153,6 +153,13 @@ def main():
             if(totalLP != None):
                 print("HDRN: ${:,}".format(totalLP))
 
+        elif(coin == 'all'):
+            totalLP_hex = getTotalLP(HDRN_POOLS)
+            totalLP_hdrn = getTotalLP(HEX_POOLS)
+
+            if(totalLP_hex != None and totalLP_hdrn != None):
+                print("HEX: ${:,}".format(totalLP_hex))
+                print("HDRN: ${:,}".format(totalLP_hdrn))
         else:
             print("invalid coin")
             return
