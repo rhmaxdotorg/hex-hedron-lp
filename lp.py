@@ -161,8 +161,8 @@ def main():
                 print("HDRN: ${:,}".format(totalLP))
 
         elif(coin == 'all'):
-            totalLP_hex = getTotalLP(HDRN_POOLS)
-            totalLP_hdrn = getTotalLP(HEX_POOLS)
+            totalLP_hex = getTotalLP(HEX_POOLS)
+            totalLP_hdrn = getTotalLP(HDRN_POOLS)
 
             if(totalLP_hex != None and totalLP_hdrn != None):
                 print("HEX: ${:,}".format(totalLP_hex))
