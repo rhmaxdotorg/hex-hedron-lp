@@ -51,7 +51,7 @@ HDRN_POOLS = ('0xe859041c9c6d70177f83de991b9d757e13cea26e',
 #
 
 #SLEEP_TIME = 5 # 5 seconds
-SLEEP_TIME = 3 # 1 minute
+SLEEP_TIME = 60 # 1 minute
 #SLEEP_TIME = 60 * 5 # 5 minutes
 #SLEEP_TIME = 60 * 60 * 2 # 2 hours
 
