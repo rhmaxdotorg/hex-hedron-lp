@@ -181,6 +181,6 @@ def main():
     return
 
 if(__name__ == '__main__'):
-    print(f'\nSTART: {str(datetime.now())}')
+    #print(f'\nSTART: {str(datetime.now())}')
     main()
-    print(f'END: {str(datetime.now())}\n')
+    #print(f'END: {str(datetime.now())}\n')
