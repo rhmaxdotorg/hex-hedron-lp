@@ -10,6 +10,19 @@ There's only 3 adjustments in code you may want to make
 - SLEEP_TIME
 - ALERT_PERCENTAGE
 
+# Dependencies
+**Windows**
+
+Install Python 3 from https://www.python.org/downloads/windows/ and bring up a command line terminal to use Python and run the script.
+
+**Linux**
+
+Python 3 should come installed by default, if not, do `apt install python3 python3-pip -y` on Debian/Ubuntu Linux distributions.
+
+**Mac**
+
+Python 2 may be installed by default, but to install Python 3 you can follow the instructions [here](https://docs.python-guide.org/starting/install3/osx/) and `brew install python`.
+
 # How to use it
 
 **Command Line Interface** (code can be repurposed for a web portal as well)
@@ -22,6 +35,13 @@ $ ./lp.py
 ```
 $ ./lp.py get hdrn
 HDRN: $4,210,140
+```
+
+**Get both HEX and HDRN liquidity**
+```
+$ ./lp.py get all
+HEX: $3,219,526
+HDRN: $13,129,188
 ```
 
 **Track HEX liquidity changes**
