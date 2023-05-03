@@ -3,10 +3,10 @@
 # How it works
 Uses dexscreener's API to query (the biggest) pools for HEX and Hedron crypto as of March 2023 (pools are hardcoded, so may need updating from time to time). **It does not get numbers from ALL pools**, but a few signficiant ones.
 
-https://api.dexscreener.com/latest/dex/pairs/ethereum/ and parsing JSON values from response['pair']['liquidity']['usd']
+Basically just queries https://api.dexscreener.com/latest/dex/pairs/ethereum/ and parses JSON values from response['pair']['liquidity']['usd'] and formats numbers so changes and total values are easy to understand.
 
 There's only 3 adjustments in code you may want to make
-- Pools HEX_POOLS and HDRN_POOLS
+- Pools for HEX_POOLS and HDRN_POOLS (optional, add/remove as fits your scenario)
 - SLEEP_TIME
 - ALERT_PERCENTAGE
 
@@ -40,8 +40,8 @@ HDRN: $4,210,140
 **Get both HEX and HDRN liquidity**
 ```
 $ ./lp.py get all
-HEX: $3,219,526
-HDRN: $13,129,188
+HEX: $13,121,310
+HDRN: $3,188,492
 ```
 
 **Track HEX liquidity changes**
