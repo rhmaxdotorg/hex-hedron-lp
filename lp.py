@@ -8,6 +8,7 @@ import sys
 import time
 import json
 import requests
+from datetime import datetime
 
 #
 # pools
@@ -71,8 +72,8 @@ def getTotalLP(pools):
 
         try:
             response = json.loads(requests.get(DEX_URL).text)
-        except Exception as error:
-            print("%s\n" % error)
+        except Exception as e:
+            print(f"\n __Exception__: \n{e}\n return None\n __Exception__")
             return None
 
         pairLP = response['pair']['liquidity']['usd']
@@ -107,25 +108,30 @@ def trackTotalLP(coin):
 
             lpNow = getTotalLP(pools)
 
+            # change for logic change
             if(lpNow != lp):
+                # calc percent
                 #change = (abs(lpNow - lp) / lp) * 100
                 change = ((lpNow - lp) / lp) * 100
-                if(change > 0):
-                    positive = True
+                
+                # check edge case from net request return
+                if type(change) != None:
+                    if change > 0: # set positive sign
+                        positive = True
+                    
+                    # generate print string
+                    str_change = "[{}{:.2f}%] {}: {}".format('+' if positive else '', change, coin, "${:,}".format(lpNow))
+                    
+                    # validate print string
+                    if "0.00" not in str_change:
+                        print(f'\nCHANGE: {str(datetime.now())}\n {str_change}')
+                        
+                        # validate & print alert
+                        if(abs(change) >= ALERT_PERCENTAGE):
+                            alert = "{:.2f}%".format(ALERT_PERCENTAGE)
+                            alert_change = "{0:.2f}".format(change)
+                            print("[!!!] LP CHANGED BY %s%% (alert set on >= %s) [!!!]" % (alert_change, alert))
 
-                if(abs(change) >= ALERT_PERCENTAGE):
-                    alert = "{:.2f}%".format(ALERT_PERCENTAGE)
-                    change = "{0:.2f}".format(change)
-
-                    print("\n[!!!] LP CHANGED BY %s%% (alert set on >= %s) [!!!]\n" % (change, alert))
-                else:
-                    change = "{0:.2f}".format(change)
-
-                if(positive):
-                    change = "+" + change
-
-                if("0.00" not in change):
-                    print("%s%%" % change)
     except KeyboardInterrupt:
         return
 
@@ -133,6 +139,7 @@ def trackTotalLP(coin):
 # main function
 #
 def main():
+
     if(len(sys.argv) < 3):
         print("%s [get or track] [hex or hdrn]" % sys.argv[0])
         return
@@ -153,6 +160,13 @@ def main():
             if(totalLP != None):
                 print("HDRN: ${:,}".format(totalLP))
 
+        elif(coin == 'all'):
+            totalLP_hex = getTotalLP(HDRN_POOLS)
+            totalLP_hdrn = getTotalLP(HEX_POOLS)
+
+            if(totalLP_hex != None and totalLP_hdrn != None):
+                print("HEX: ${:,}".format(totalLP_hex))
+                print("HDRN: ${:,}".format(totalLP_hdrn))
         else:
             print("invalid coin")
             return
@@ -167,4 +181,6 @@ def main():
     return
 
 if(__name__ == '__main__'):
-	main()
+    print(f'\nSTART: {str(datetime.now())}')
+    main()
+    print(f'END: {str(datetime.now())}\n')
