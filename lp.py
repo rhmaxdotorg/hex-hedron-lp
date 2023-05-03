@@ -8,6 +8,7 @@ import sys
 import time
 import json
 import requests
+from datetime import datetime
 
 #
 # pools
@@ -108,6 +109,7 @@ def trackTotalLP(coin):
             lpNow = getTotalLP(pools)
 
             if(lpNow != lp):
+                print(f'\n CHANGE: {str(datetime.now())}')
                 #change = (abs(lpNow - lp) / lp) * 100
                 change = ((lpNow - lp) / lp) * 100
                 if(change > 0):
@@ -133,6 +135,7 @@ def trackTotalLP(coin):
 # main function
 #
 def main():
+
     if(len(sys.argv) < 3):
         print("%s [get or track] [hex or hdrn]" % sys.argv[0])
         return
@@ -174,4 +177,6 @@ def main():
     return
 
 if(__name__ == '__main__'):
-	main()
+    print(f'\nSTART: {str(datetime.now())}')
+    main()
+    print(f'END: {str(datetime.now())}\n')
