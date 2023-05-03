@@ -51,7 +51,7 @@ HDRN_POOLS = ('0xe859041c9c6d70177f83de991b9d757e13cea26e',
 #
 
 #SLEEP_TIME = 5 # 5 seconds
-SLEEP_TIME = 60 # 1 minute
+SLEEP_TIME = 3 # 1 minute
 #SLEEP_TIME = 60 * 5 # 5 minutes
 #SLEEP_TIME = 60 * 60 * 2 # 2 hours
 
@@ -72,8 +72,8 @@ def getTotalLP(pools):
 
         try:
             response = json.loads(requests.get(DEX_URL).text)
-        except Exception as error:
-            print("%s\n" % error)
+        except Exception as e:
+            print(f"\n __Exception__: \n{e}\n return None\n __Exception__")
             return None
 
         pairLP = response['pair']['liquidity']['usd']
@@ -108,26 +108,30 @@ def trackTotalLP(coin):
 
             lpNow = getTotalLP(pools)
 
+            # change for logic change
             if(lpNow != lp):
-                print(f'\n CHANGE: {str(datetime.now())}')
+                # calc percent
                 #change = (abs(lpNow - lp) / lp) * 100
                 change = ((lpNow - lp) / lp) * 100
-                if(change > 0):
-                    positive = True
+                
+                # check edge case from net request return
+                if type(change) != None:
+                    if change > 0: # set positive sign
+                        positive = True
+                    
+                    # generate print string
+                    str_change = "[{}{:.2f}%] {}: {}".format('+' if positive else '', change, coin, "${:,}".format(lpNow))
+                    
+                    # validate print string
+                    if "0.00" not in str_change:
+                        print(f'\nCHANGE: {str(datetime.now())}\n {str_change}')
+                        
+                        # validate & print alert
+                        if(abs(change) >= ALERT_PERCENTAGE):
+                            alert = "{:.2f}%".format(ALERT_PERCENTAGE)
+                            alert_change = "{0:.2f}".format(change)
+                            print("[!!!] LP CHANGED BY %s%% (alert set on >= %s) [!!!]" % (alert_change, alert))
 
-                if(abs(change) >= ALERT_PERCENTAGE):
-                    alert = "{:.2f}%".format(ALERT_PERCENTAGE)
-                    change = "{0:.2f}".format(change)
-
-                    print("\n[!!!] LP CHANGED BY %s%% (alert set on >= %s) [!!!]\n" % (change, alert))
-                else:
-                    change = "{0:.2f}".format(change)
-
-                if(positive):
-                    change = "+" + change
-
-                if("0.00" not in change):
-                    print("%s%%" % change)
     except KeyboardInterrupt:
         return
 
